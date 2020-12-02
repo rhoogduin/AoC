@@ -47,7 +47,7 @@ def test ( entries = [], a = 0, n = entries ) :
 
     for i in range( a, len(numbers) - (n - 1) ) :
         entries.append(numbers[i])
-        test( entries, a + 1, n - 1 )
+        test( entries, i + 1, n - 1 )
         entries.pop()
 
 test()
