@@ -10,13 +10,12 @@ file.close()
 
 """boardpass code to seatID"""
 def toInt (input : str) -> int :
-    bin = "" 
-    for c in input :
-        if c == 'B' or c == 'R' :
-            bin += '1'
-        else:
-            bin += '0'
-    return int (bin, 2)
+    n = 0
+    length = len(input)
+    for i in range(length):
+        if input[i] == 'B' or input[i] == 'R' :
+            n += 2 ** (length - i - 1)
+    return n
     
 seats = list( map(toInt, codes) )
 
