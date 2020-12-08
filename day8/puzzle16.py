@@ -74,7 +74,7 @@ for i in range( len(program) ) :
         
         #try altered program
         cpu = CPU(program)
-        if cpu.test(2000) :
+        if cpu.test(1000) :
             print (f"Found faulty nop at {i}: {original}.")
             instr_pos = i
             instr = ("jmp", program[i][1])
@@ -86,7 +86,7 @@ for i in range( len(program) ) :
         
         #try altered program
         cpu = CPU(program)
-        if cpu.test(2000) :
+        if cpu.test(1000) :
             print (f"Found faulty jmp at {i}: {original}.")
             instr_pos = i
             instr = ("nop", program[i][1])
