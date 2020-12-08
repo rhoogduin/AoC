@@ -1,5 +1,5 @@
 
-"""simple CPU to execute game console boot code"""
+#simple CPU to execute game console boot code
 class CPU :
     def __init__ (self, program):
         self.PC = 0
@@ -41,7 +41,7 @@ class CPU :
             return False
         return True
 
-"""read input"""
+#read input
 file = open("input.txt", "r")
 
 lines = []
@@ -50,10 +50,10 @@ lines = file.read().splitlines()
     
 file.close()
 
-"""list that will contain the instructions"""
+#list that will contain the instructions
 program = []
 
-"""turn each line into an instruction and add to program"""
+#turn each line into an instruction and add to program
 for line in lines :
     line = line.split()
     
@@ -64,30 +64,27 @@ for line in lines :
     
     program.append(instruction)
 
-"""try to find broken instruction"""
-i = 0
-while i < len(program) :
+#try to find broken instruction
+for i in range( len(program) ) :
     original = program[i]
     
-    """if nop, replace with jump and try executing"""
+    #if nop, replace with jump and try executing
     if program[i][0] == "nop" :
         program[i] = ("jmp", program[i][1])
         
-        """try altered program"""
+        #try altered program
         cpu = CPU(program)
         if cpu.test(2000) :
             print (f"Found faulty nop at {i}: {original}.")
             instr_pos = i
             instr = ("jmp", program[i][1])
-            break
-        
-        program[i] = original
+            break 
     
-    """if jump, replace with nop and try executing"""
-    if program[i][0] == "jmp" :
+    #if jump, replace with nop and try executing
+    elif program[i][0] == "jmp" :
         program[i] = ("nop", program[i][1])
         
-        """try altered program"""
+        #try altered program
         cpu = CPU(program)
         if cpu.test(2000) :
             print (f"Found faulty jmp at {i}: {original}.")
@@ -95,9 +92,7 @@ while i < len(program) :
             instr = ("nop", program[i][1])
             break
             
-        program[i] = original
-    
-    i += 1
+    program[i] = original
     
 print ("Fixing program!")
 
